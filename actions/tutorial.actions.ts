@@ -36,7 +36,7 @@ export async function createTutorial(data: unknown) {
     return { success: true };
   } catch (err) {
     if (err instanceof z.ZodError) {
-      return { success: false, error: err.errors[0]?.message ?? "Dados inválidos" };
+      return { success: false, error: err.issues[0]?.message ?? "Dados inválidos" };
     }
     console.error("[createTutorial]", err);
     return { success: false, error: "Erro ao criar tutorial" };
@@ -60,7 +60,7 @@ export async function updateTutorial(id: string, data: unknown) {
     return { success: true };
   } catch (err) {
     if (err instanceof z.ZodError) {
-      return { success: false, error: err.errors[0]?.message ?? "Dados inválidos" };
+      return { success: false, error: err.issues[0]?.message ?? "Dados inválidos" };
     }
     return { success: false, error: "Erro ao atualizar tutorial" };
   }
